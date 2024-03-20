@@ -23,5 +23,5 @@ export default function Home() {
     );
   }
 
-  return <a href="/api/auth/signin">Faça o seu cadastro</a>;
+  // return <a href="/api/auth/signin">Faça o seu cadastro</a>;
 }
