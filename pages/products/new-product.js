@@ -6,10 +6,12 @@ export default function NewProdut() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
+  const [goToProducts, setGoToProducts] = useState(false);
   async function createProduct(ev) {
     ev.preventDefault();
     const data = { title, description, price };
     await axios.post("/api/products", data);
+    setGoToProducts(true);
   }
 
   return (
@@ -46,7 +48,7 @@ export default function NewProdut() {
           Preço (R$)
         </label>
         <input
-          type="text"
+          type="number"
           placeholder="insira o preço"
           id="product-price"
           name="product-price"
