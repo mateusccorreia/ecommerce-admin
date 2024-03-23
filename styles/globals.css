@@ -5,3 +5,20 @@
 input {
   @apply border-2 border-gray-300 rounded-md;
 }
+
+table.product-table {
+  @apply w-full;
+}
+
+table.product-table {
+  @apply bg-purple-100;
+}
+
+table.product-table tr td {
+  @apply border border-purple-300 p-1;
+}
+
+table.product-table a {
+  @apply bg-purple-900 text-white text-sm py-1 px-2 
+  rounded-md inline-flex gap-1;
+}
