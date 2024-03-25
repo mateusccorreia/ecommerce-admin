@@ -7,6 +7,7 @@ export default function ProductForm({
   title: existingTitle,
   description: existingDescription,
   price: existingPrice,
+  images,
 }) {
   const [title, setTitle] = useState(existingTitle || "");
   const [description, setDescription] = useState(existingDescription || "");
@@ -29,11 +30,24 @@ export default function ProductForm({
     router.push("/products");
   }
 
+  async function uploadImages(ev) {
+    const files = ev.target?.files;
+    if (files?.length > 0) {
+      const data = new FormData();
+      for (const file of files) {
+        data.append("file", file);
+      }
+      const res = await fetch("/api/upload", {
+        method: "POST",
+        body: data,
+      });
+      console.log(res);
+    }
+  }
+
   return (
     <form onSubmit={saveProduct}>
-      <label htmlFor="product-name" className="text-purple-900">
-        Nome do Produto
-      </label>
+      <label htmlFor="product-name">Nome do Produto</label>
       <input
         type="text"
         placeholder="insira o nome"
@@ -43,9 +57,29 @@ export default function ProductForm({
         value={title}
         onChange={(ev) => setTitle(ev.target.value)}
       />
-      <label htmlFor="description" className="text-purple-900">
-        Descrição
-      </label>
+      <label>Fotos</label>
+      <div className="mb-2">
+        <label className="w-24 h-24 flex items-center justify-center text-sm gap-1 text-gray-500 rounded-lg bg-gray-200 cursor-pointer">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-4 h-4"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5"
+            />
+          </svg>
+          <div>Upload</div>
+          <input type="file" className="hidden" onChange={uploadImages} />
+        </label>
+        {!images?.length && <div>Sem fotos nesse produto</div>}
+      </div>
+      <label htmlFor="description">Descrição</label>
       <textarea
         type="text"
         placeholder="insira a descrição"
@@ -55,9 +89,7 @@ export default function ProductForm({
         value={description}
         onChange={(ev) => setDescription(ev.target.value)}
       ></textarea>
-      <label htmlFor="price" className="text-purple-900">
-        Preço (R$)
-      </label>
+      <label htmlFor="price">Preço (R$)</label>
       <input
         type="number"
         placeholder="insira o preço"

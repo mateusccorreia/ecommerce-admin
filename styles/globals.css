@@ -35,3 +35,11 @@ table.product-table a {
 .btn-default {
   @apply bg-gray-500 text-white;
 }
+
+label {
+  @apply text-purple-900;
+}
+
+h1 {
+  @apply text-purple-900 text-lg;
+}
