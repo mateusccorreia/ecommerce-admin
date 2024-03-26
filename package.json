@@ -10,8 +10,10 @@
   },
   "dependencies": {
     "@auth/mongodb-adapter": "^2.1.0",
+    "@aws-sdk/client-s3": "^3.540.0",
     "@tailwindcss/typography": "^0.5.10",
     "axios": "^1.6.8",
+    "mime-types": "^2.1.35",
     "mongodb": "^6.3.0",
     "mongoose": "^8.2.2",
     "multiparty": "^4.2.3",
@@ -28,5 +30,6 @@
     "eslint-config-next": "14.1.0",
     "postcss": "^8.4.36",
     "tailwindcss": "^3.4.1"
-  }
+  },
+  "packageManager": "yarn@4.1.1"
 }
