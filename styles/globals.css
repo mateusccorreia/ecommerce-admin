@@ -43,3 +43,7 @@ label {
 h1 {
   @apply text-purple-900 text-lg;
 }
+
+img {
+  max-height: 100%;
+}

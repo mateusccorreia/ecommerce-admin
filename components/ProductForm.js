@@ -58,7 +58,13 @@ export default function ProductForm({
         onChange={(ev) => setTitle(ev.target.value)}
       />
       <label>Fotos</label>
-      <div className="mb-2">
+      <div className="mb-2 flex flex-wrap gap-2">
+        {!!images?.length &&
+          images.map((link) => (
+            <div key={link} className="h-24">
+              <img src={link} alt="" className="rounded-lg" />
+            </div>
+          ))}
         <label className="w-24 h-24 flex items-center justify-center text-sm gap-1 text-gray-500 rounded-lg bg-gray-200 cursor-pointer">
           <svg
             xmlns="http://www.w3.org/2000/svg"
