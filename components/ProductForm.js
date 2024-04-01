@@ -124,10 +124,7 @@ export default function ProductForm({
         value={price}
         onChange={(ev) => setPrice(ev.target.value)}
       />
-      <button
-        className="bg-purple-800 text-white px-4 py-1 rounded-sm mt-2"
-        type="submit"
-      >
+      <button className="btn-purple" type="submit">
         Salvar
       </button>
     </form>

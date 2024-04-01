@@ -4,9 +4,7 @@ import ProductForm from "@/components/ProductForm";
 export default function NewProduct() {
   return (
     <Layout>
-      <h1>
-        <b>Novo Produto</b>
-      </h1>
+      <h1>Novo Produto</h1>
       <ProductForm />
     </Layout>
   );

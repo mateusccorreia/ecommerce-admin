@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 input {
-  @apply border-2 border-gray-300 rounded-md;
+  @apply border-2 border-gray-300 rounded-md w-full !important;
 }
 
 table.product-table {
@@ -24,16 +24,21 @@ table.product-table a {
 }
 
 .btn-default,
-.btn-red {
-  @apply px-4 py-1 rounded-md;
+.btn-red,
+.btn-purple {
+  @apply px-4 py-1 rounded-md text-white;
 }
 
 .btn-red {
-  @apply bg-red-800 text-white;
+  @apply bg-red-800 !important;
+}
+
+.btn-purple {
+  @apply bg-purple-800 !important;
 }
 
 .btn-default {
-  @apply bg-gray-500 text-white;
+  @apply bg-gray-500;
 }
 
 label {
@@ -41,7 +46,7 @@ label {
 }
 
 h1 {
-  @apply text-purple-900 text-lg;
+  @apply text-purple-900 text-lg font-bold !important;
 }
 
 img {
