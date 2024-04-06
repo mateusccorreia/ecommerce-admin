@@ -51,6 +51,7 @@ export default function Categories() {
         <thead>
           <tr>
             <td>Nome da categoria</td>
+            <td>Categoria principal</td>
           </tr>
         </thead>
         <tbody>
@@ -58,6 +59,7 @@ export default function Categories() {
             categories.map((category) => (
               <tr>
                 <td>{category.name}</td>
+                <td>{category.parent}</td>
               </tr>
             ))}
         </tbody>
