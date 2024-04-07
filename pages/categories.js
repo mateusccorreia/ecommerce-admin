@@ -59,7 +59,7 @@ export default function Categories() {
             categories.map((category) => (
               <tr>
                 <td>{category.name}</td>
-                <td>{category.parent}</td>
+                <td>{category?.parent?.name}</td>
               </tr>
             ))}
         </tbody>
