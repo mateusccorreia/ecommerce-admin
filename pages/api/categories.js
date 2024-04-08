@@ -17,10 +17,13 @@ export default async function handle(req, res) {
 
   if (method === "PUT") {
     const { name, parentCategory, _id } = req.body;
-    const categoryDoc = await Category.updateOne({
-      name,
-      parent: parentCategory,
-    });
+    const categoryDoc = await Category.updateOne(
+      { _id },
+      {
+        name,
+        parent: parentCategory,
+      }
+    );
     res.json(categoryDoc);
   }
 }

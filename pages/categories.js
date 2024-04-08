@@ -1,8 +1,9 @@
 import Layout from "@/components/Layout";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { withSwal } from "react-sweetalert2";
 
-export default function Categories() {
+function Categories({ swal }) {
   const [editedCategory, setEditedCategory] = useState(null);
   const [name, setName] = useState("");
   const [parentCategory, setParentCategory] = useState("");
@@ -21,6 +22,7 @@ export default function Categories() {
     if (editedCategory) {
       data._id = editedCategory._id;
       await axios.put("/api/categories", data);
+      setEditedCategory(null);
     } else {
       await axios.post("/api/categories", data);
     }
@@ -32,6 +34,25 @@ export default function Categories() {
     setEditedCategory(category);
     setName(category.name);
     setParentCategory(category.parent?._id);
+  }
+
+  function deleteCategory(category) {
+    swal
+      .fire({
+        title: "Você tem certeza?",
+        text: `Você deseja excluir ${category.name}?`,
+        showCancelButton: true,
+        cancelButtonText: "Cancelar",
+        confirmButtonText: "Sim, excluir",
+        confirmButtonColor: "#d55",
+        reverseButtons: true,
+      })
+      .then(async (result) => {
+        if (result.isConfirmed) {
+          const { _id } = category;
+          await axios.delete("/api/categories?_id=" + _id);
+        }
+      });
   }
 
   return (
@@ -85,7 +106,12 @@ export default function Categories() {
                   >
                     Editar
                   </button>
-                  <button className="btn-purple">Excluir</button>
+                  <button
+                    onClick={() => deleteCategory(category)}
+                    className="btn-purple"
+                  >
+                    Excluir
+                  </button>
                 </td>
               </tr>
             ))}
@@ -94,3 +120,5 @@ export default function Categories() {
     </Layout>
   );
 }
+
+export default withSwal(({ swal }, ref) => <Categories swal={swal} />);
