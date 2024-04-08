@@ -3,6 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 export default function Categories() {
+  const [editedCategory, setEditedCategory] = useState(null);
   const [name, setName] = useState("");
   const [parentCategory, setParentCategory] = useState("");
   const [categories, setCategories] = useState("");
@@ -16,15 +17,31 @@ export default function Categories() {
   }
   async function saveCategory(ev) {
     ev.preventDefault();
-    await axios.post("/api/categories", { name, parentCategory });
+    const data = { name, parentCategory };
+    if (editedCategory) {
+      data._id = editedCategory._id;
+      await axios.put("/api/categories", data);
+    } else {
+      await axios.post("/api/categories", data);
+    }
     setName("");
     fetchCategories();
+  }
+
+  function editCategory(category) {
+    setEditedCategory(category);
+    setName(category.name);
+    setParentCategory(category.parent?._id);
   }
 
   return (
     <Layout>
       <h1>Categorias</h1>
-      <label>Nova categoria</label>
+      <label>
+        {editedCategory
+          ? `Editar categoria ${editedCategory.name}`
+          : "Criar nova categoria"}
+      </label>
       <form onSubmit={saveCategory} className="flex gap-1">
         <input
           className="mb-0"
@@ -52,6 +69,7 @@ export default function Categories() {
           <tr>
             <td>Nome da categoria</td>
             <td>Categoria principal</td>
+            <td></td>
           </tr>
         </thead>
         <tbody>
@@ -60,6 +78,15 @@ export default function Categories() {
               <tr>
                 <td>{category.name}</td>
                 <td>{category?.parent?.name}</td>
+                <td>
+                  <button
+                    onClick={() => editCategory(category)}
+                    className="btn-purple mr-1"
+                  >
+                    Editar
+                  </button>
+                  <button className="btn-purple">Excluir</button>
+                </td>
               </tr>
             ))}
         </tbody>
