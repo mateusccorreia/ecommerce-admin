@@ -66,6 +66,10 @@ export default function ProductForm({
         value={title}
         onChange={(ev) => setTitle(ev.target.value)}
       />
+      <label>Categoria</label>
+      <select>
+        <option value="">Sem categoria</option>
+      </select>
       <label>Fotos</label>
       <div className="mb-2 flex flex-wrap gap-1">
         <ReactSortable
