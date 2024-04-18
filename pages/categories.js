@@ -64,24 +64,26 @@ function Categories({ swal }) {
           ? `Editar categoria ${editedCategory.name}`
           : "Criar nova categoria"}
       </label>
-      <form onSubmit={saveCategory} className="flex gap-1">
-        <input
-          className="mb-0"
-          type="text"
-          placeholder={"nome da categoria"}
-          onChange={(ev) => setName(ev.target.value)}
-          value={name}
-        />
-        <select
-          onChange={(ev) => setParentCategory(ev.target.value)}
-          value={parentCategory}
-        >
-          <option value="">Sem categoria principal</option>
-          {categories.length > 0 &&
-            categories.map((category) => (
-              <option value={category._id}>{category.name}</option>
-            ))}
-        </select>
+      <form onSubmit={saveCategory}>
+        <div className="flex gap-1">
+          <input
+            type="text"
+            placeholder={"nome da categoria"}
+            onChange={(ev) => setName(ev.target.value)}
+            value={name}
+          />
+          <select
+            onChange={(ev) => setParentCategory(ev.target.value)}
+            value={parentCategory}
+          >
+            <option value="">Sem categoria principal</option>
+            {categories.length > 0 &&
+              categories.map((category) => (
+                <option value={category._id}>{category.name}</option>
+              ))}
+          </select>
+        </div>
+
         <button type="submit" className="btn-purple py-1">
           Salvar
         </button>
