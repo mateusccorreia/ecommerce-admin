@@ -7,7 +7,8 @@ function Categories({ swal }) {
   const [editedCategory, setEditedCategory] = useState(null);
   const [name, setName] = useState("");
   const [parentCategory, setParentCategory] = useState("");
-  const [categories, setCategories] = useState("");
+  const [categories, setCategories] = useState([]);
+  const [properties, setProperties] = useState([]);
   useEffect(() => {
     fetchCategories();
   }, []);
@@ -56,6 +57,12 @@ function Categories({ swal }) {
       });
   }
 
+  function addProperty() {
+    setProperties((prev) => {
+      return [...prev, { name: "", values: "" }];
+    });
+  }
+
   return (
     <Layout>
       <h1>Categorias</h1>
@@ -83,7 +90,27 @@ function Categories({ swal }) {
               ))}
           </select>
         </div>
-
+        <div className="mb-2">
+          <label className="block">Propriedades</label>
+          <button onClick={addProperty} className="btn-default text-sm">
+            Adicionar uma nova propriedade
+          </button>
+          {properties.length > 0 &&
+            properties.map((property) => (
+              <div className="flex gap-1">
+                <input
+                  type="text"
+                  value={property.name}
+                  placeholder="nome da propriedade (exemplo: cor)"
+                />
+                <input
+                  type="text"
+                  value={property.values}
+                  placeholder="valores, separados por virgula"
+                />
+              </div>
+            ))}
+        </div>
         <button type="submit" className="btn-purple py-1">
           Salvar
         </button>
