@@ -28,6 +28,7 @@ function Categories({ swal }) {
       await axios.post("/api/categories", data);
     }
     setName("");
+    setParentCategory("");
     fetchCategories();
   }
 
@@ -63,6 +64,10 @@ function Categories({ swal }) {
     });
   }
 
+  function handlePropertyNameChange(index, property, newName) {
+    console.log(index, property, newName);
+  }
+
   return (
     <Layout>
       <h1>Categorias</h1>
@@ -86,21 +91,30 @@ function Categories({ swal }) {
             <option value="">Sem categoria principal</option>
             {categories.length > 0 &&
               categories.map((category) => (
-                <option value={category._id}>{category.name}</option>
+                <option key={category} value={category._id}>
+                  {category.name}
+                </option>
               ))}
           </select>
         </div>
         <div className="mb-2">
           <label className="block">Propriedades</label>
-          <button onClick={addProperty} className="btn-default text-sm">
+          <button
+            onClick={addProperty}
+            type="button"
+            className="btn-default text-sm mb-2"
+          >
             Adicionar uma nova propriedade
           </button>
           {properties.length > 0 &&
-            properties.map((property) => (
+            properties.map((property, index) => (
               <div className="flex gap-1">
                 <input
                   type="text"
                   value={property.name}
+                  onChange={(ev) =>
+                    handlePropertyNameChange(index, property, ev.target.value)
+                  }
                   placeholder="nome da propriedade (exemplo: cor)"
                 />
                 <input
@@ -126,7 +140,7 @@ function Categories({ swal }) {
         <tbody>
           {categories.length > 0 &&
             categories.map((category) => (
-              <tr>
+              <tr key={category._id}>
                 <td>{category.name}</td>
                 <td>{category?.parent?.name}</td>
                 <td>
