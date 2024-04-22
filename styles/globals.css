@@ -46,7 +46,7 @@ table.product-table a {
 }
 
 .btn-default {
-  @apply bg-gray-500;
+  @apply bg-gray-500 !important;
 }
 
 label {

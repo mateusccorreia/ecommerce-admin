@@ -65,7 +65,19 @@ function Categories({ swal }) {
   }
 
   function handlePropertyNameChange(index, property, newName) {
-    console.log(index, property, newName);
+    setProperties((prev) => {
+      const properties = [...prev];
+      properties[index].name = newName;
+      return properties;
+    });
+  }
+
+  function handlePropertyValuesChange(index, property, newValues) {
+    setProperties((prev) => {
+      const properties = [...prev];
+      properties[index].name = newValues;
+      return properties;
+    });
   }
 
   return (
@@ -120,6 +132,9 @@ function Categories({ swal }) {
                 <input
                   type="text"
                   value={property.values}
+                  onChange={(ev) =>
+                    handlePropertyValuesChange(index, property, ev.target.value)
+                  }
                   placeholder="valores, separados por virgula"
                 />
               </div>
