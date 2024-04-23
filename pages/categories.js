@@ -75,8 +75,16 @@ function Categories({ swal }) {
   function handlePropertyValuesChange(index, property, newValues) {
     setProperties((prev) => {
       const properties = [...prev];
-      properties[index].name = newValues;
+      properties[index].values = newValues;
       return properties;
+    });
+  }
+
+  function removeProperty(indexToRemove) {
+    setProperties((prev) => {
+      return [...prev].filter((p, pIndex) => {
+        return pIndex !== indexToRemove;
+      });
     });
   }
 
@@ -120,7 +128,7 @@ function Categories({ swal }) {
           </button>
           {properties.length > 0 &&
             properties.map((property, index) => (
-              <div className="flex gap-1">
+              <div className="flex gap-1 mb-2">
                 <input
                   type="text"
                   value={property.name}
@@ -137,6 +145,13 @@ function Categories({ swal }) {
                   }
                   placeholder="valores, separados por virgula"
                 />
+                <button
+                  className="btn-default"
+                  type="button"
+                  onClick={() => removeProperty(index)}
+                >
+                  Remover
+                </button>
               </div>
             ))}
         </div>
