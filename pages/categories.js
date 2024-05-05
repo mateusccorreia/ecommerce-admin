@@ -24,7 +24,7 @@ function Categories({ swal }) {
       parentCategory,
       properties: properties.map((p) => ({
         name: p.name,
-        value: p.value.split(","),
+        values: p.values.split(","),
       })),
     };
     if (editedCategory) {
@@ -36,6 +36,7 @@ function Categories({ swal }) {
     }
     setName("");
     setParentCategory("");
+    setProperties([]);
     fetchCategories();
   }
 
