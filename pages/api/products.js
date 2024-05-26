@@ -20,7 +20,7 @@ export default async function handle(req, res) {
       description,
       price,
       images,
-      category,
+      category: category || null,
     });
     res.json(productDoc);
   }
@@ -29,7 +29,7 @@ export default async function handle(req, res) {
     const { title, description, price, images, category, _id } = req.body;
     await Product.updateOne(
       { _id },
-      { title, description, price, images, category }
+      { title, description, price, images, category: category || null }
     );
     res.json(true);
   }

@@ -19,31 +19,38 @@ function Categories({ swal }) {
   }
   async function saveCategory(ev) {
     ev.preventDefault();
+    const mappedProperties = properties.map((p) => ({
+      name: p.name,
+      values: p.values,
+    }));
     const data = {
       name,
-      parentCategory,
-      properties: properties.map((p) => ({
-        name: p.name,
-        values: p.values.split(","),
-      })),
+      parentCategory: parentCategory || null,
+      properties: mappedProperties,
     };
-    if (editedCategory) {
-      data._id = editedCategory._id;
-      await axios.put("/api/categories", data);
-      setEditedCategory(null);
-    } else {
-      await axios.post("/api/categories", data);
+
+    try {
+      if (editedCategory) {
+        data._id = editedCategory._id;
+        await axios.put("/api/categories", data);
+        setEditedCategory(null);
+      } else {
+        await axios.post("/api/categories", data);
+      }
+      setName("");
+      setParentCategory("");
+      setProperties([]);
+      fetchCategories();
+    } catch (err) {
+      console.error("Error saving category: ", err);
     }
-    setName("");
-    setParentCategory("");
-    setProperties([]);
-    fetchCategories();
   }
 
   function editCategory(category) {
     setEditedCategory(category);
     setName(category.name);
     setParentCategory(category.parent?._id);
+    setProperties(category.properties);
   }
 
   function deleteCategory(category) {
@@ -172,6 +179,7 @@ function Categories({ swal }) {
                 setEditedCategory(null);
                 setName("");
                 setParentCategory("");
+                setProperties([]);
               }}
             >
               Cancelar
