@@ -62,10 +62,17 @@ export default function ProductForm({
     setImages(images);
   }
 
-  const properties = [];
+  const propertiesToFill = [];
   if (categories.length > 0 && category) {
-    const setCatInfo = categories.find(({ _id }) => _id === category);
-    console.log(setCatInfo);
+    let catInfo = categories.find(({ _id }) => _id === category);
+    propertiesToFill.push(...catInfo.properties);
+    while (catInfo?.parent?._id) {
+      const parentCat = categories.find(
+        ({ _id }) => _id === catInfo?.parent?._id
+      );
+      propertiesToFill.push(parentCat.properties);
+      catInfo = parentCat;
+    }
   }
 
   return (
@@ -86,7 +93,8 @@ export default function ProductForm({
         {categories.length > 0 &&
           categories.map((c) => <option value={c._id}>{c.name}</option>)}
       </select>
-      {categories.length > 0 && <div></div>}
+      {propertiesToFill.length > 0 &&
+        propertiesToFill.map((p) => <div>{p.name}</div>)}
       <label>Fotos</label>
       <div className="mb-2 flex flex-wrap gap-1">
         <ReactSortable
