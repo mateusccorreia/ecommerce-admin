@@ -1,7 +1,9 @@
+import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
 export default function Nav() {
+  const inactiveLink = "flex gap-1 p-1;";
   function ActiveLink({ children, href }) {
     const router = useRouter();
     const isActive = router.pathname === href;
@@ -136,7 +138,7 @@ export default function Nav() {
           </svg>
           Configurações
         </ActiveLink>
-        <button>
+        <button onClick={() => signOut()} className={inactiveLink}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
