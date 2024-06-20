@@ -4,6 +4,8 @@ import { useRouter } from "next/router";
 
 export default function Nav() {
   const inactiveLink = "flex gap-1 p-1;";
+  const inactiveIcon = "w-6 h-6";
+  const activeIcon = inactiveIcon + "text-primary";
   function ActiveLink({ children, href }) {
     const router = useRouter();
     const isActive = router.pathname === href;
@@ -11,8 +13,8 @@ export default function Nav() {
       display: "flex",
       gap: "0.25rem",
       padding: "0.25rem",
-      backgroundColor: isActive ? "white" : "transparent",
-      color: isActive ? "#1E3A8A" : "white",
+      backgroundColor: isActive ? "#EAE8FB" : "transparent",
+      color: isActive ? "black" : "gray",
       borderRadius: "0.375rem",
     };
 
@@ -28,8 +30,15 @@ export default function Nav() {
     );
   }
 
+  const router = useRouter();
+
+  async function logout() {
+    await router.push("/");
+    await signOut();
+  }
+
   return (
-    <aside className="text-white p-4 pr-0">
+    <aside className="text-gray-500 p-4">
       <Link href={"/"} className="flex gap-1 mb-4 mr-4">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -55,7 +64,7 @@ export default function Nav() {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-6 h-6"
+            className={router.pathname === "/" ? activeIcon : inactiveIcon}
           >
             <path
               strokeLinecap="round"
@@ -138,7 +147,7 @@ export default function Nav() {
           </svg>
           Configurações
         </ActiveLink>
-        <button onClick={() => signOut()} className={inactiveLink}>
+        <button onClick={logout} className={inactiveLink}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
