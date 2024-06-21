@@ -2,10 +2,8 @@ import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-export default function Nav() {
+export default function Nav({ show }) {
   const inactiveLink = "flex gap-1 p-1;";
-  const inactiveIcon = "w-6 h-6";
-  const activeIcon = inactiveIcon + "text-primary";
   function ActiveLink({ children, href }) {
     const router = useRouter();
     const isActive = router.pathname === href;
@@ -14,7 +12,7 @@ export default function Nav() {
       gap: "0.25rem",
       padding: "0.25rem",
       backgroundColor: isActive ? "#EAE8FB" : "transparent",
-      color: isActive ? "black" : "gray",
+      color: isActive ? "#5542F6" : "gray",
       borderRadius: "0.375rem",
     };
 
@@ -30,15 +28,20 @@ export default function Nav() {
     );
   }
 
-  const router = useRouter();
-
   async function logout() {
     await router.push("/");
     await signOut();
   }
 
   return (
-    <aside className="text-gray-500 p-4">
+    <aside
+      className={
+        show
+          ? "left-0"
+          : "-left-full top-0 " +
+            "text-gray-500 p-4 fixed w-full bg-bgGray h-full md:static md:w-auto"
+      }
+    >
       <Link href={"/"} className="flex gap-1 mb-4 mr-4">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -64,7 +67,7 @@ export default function Nav() {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className={router.pathname === "/" ? activeIcon : inactiveIcon}
+            className="w-6 h-6"
           >
             <path
               strokeLinecap="round"
@@ -154,7 +157,7 @@ export default function Nav() {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="size-6"
+            className="w-6 h-6"
           >
             <path
               strokeLinecap="round"
