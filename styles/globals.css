@@ -22,8 +22,12 @@ table.product-table {
   @apply bg-purple-100;
 }
 
-table.product-table tr td {
-  @apply border border-purple-300 p-1;
+/* table.product-table tr td {
+  @apply border p-1;
+} */
+
+table.product-table thead tr td {
+  @apply text-sm text-gray-600 uppercase border-b border-gray-200;
 }
 
 table.product-table a {
