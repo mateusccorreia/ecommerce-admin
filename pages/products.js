@@ -15,7 +15,7 @@ export default function Products() {
     <Layout>
       <Link
         href={"products/new-product"}
-        className="bg-purple-800 text-white py-1 px-2 rounded-md"
+        className="bg-primary text-white py-1 px-2 rounded-sm"
       >
         Adicionar novo produto
       </Link>

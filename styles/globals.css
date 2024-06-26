@@ -15,50 +15,42 @@ select:focus {
 }
 
 table.product-table {
-  @apply w-full;
+  @apply w-full bg-white rounded-md shadow-md;
 }
-
-table.product-table {
-  @apply bg-purple-100;
-}
-
-/* table.product-table tr td {
-  @apply border p-1;
-} */
 
 table.product-table thead tr td {
-  @apply text-sm text-gray-600 uppercase border-b border-gray-200;
+  @apply text-sm text-gray-600 uppercase border-b border-gray-200 px-4;
+}
+
+table.product-table tr td {
+  @apply px-4 py-1;
 }
 
 table.product-table a {
-  @apply bg-purple-900 text-white text-sm py-1 px-2 
-  rounded-md inline-flex gap-1 mx-1;
+  @apply bg-gray-600 text-white text-sm py-1 px-2 
+  rounded-sm inline-flex gap-1 mx-1;
 }
 
 .btn-default,
 .btn-red,
-.btn-purple {
-  @apply px-4 py-1 rounded-md text-white;
+.btn-blue {
+  @apply px-4 py-1 rounded-sm text-white;
 }
 
 .btn-red {
   @apply bg-red-800 !important;
 }
 
-.btn-purple {
-  @apply bg-purple-800 !important;
+.btn-blue {
+  @apply bg-primary !important;
 }
 
 .btn-default {
-  @apply bg-gray-500 !important;
-}
-
-label {
-  @apply text-purple-900;
+  @apply bg-gray-600 !important;
 }
 
 h1 {
-  @apply text-purple-900 text-lg font-bold !important;
+  @apply text-lg font-bold !important;
 }
 
 img {

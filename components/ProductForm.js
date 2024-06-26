@@ -174,7 +174,7 @@ export default function ProductForm({
         value={price}
         onChange={(ev) => setPrice(ev.target.value)}
       />
-      <button className="btn-purple" type="submit">
+      <button className="btn-blue" type="submit">
         Salvar
       </button>
     </form>

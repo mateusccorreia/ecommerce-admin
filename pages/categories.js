@@ -185,7 +185,7 @@ function Categories({ swal }) {
               Cancelar
             </button>
           )}
-          <button type="submit" className="btn-purple py-1">
+          <button type="submit" className="btn-blue py-1">
             Salvar
           </button>
         </div>
@@ -208,13 +208,13 @@ function Categories({ swal }) {
                   <td>
                     <button
                       onClick={() => editCategory(category)}
-                      className="btn-purple mr-1"
+                      className="btn-default mr-1"
                     >
                       Editar
                     </button>
                     <button
                       onClick={() => deleteCategory(category)}
-                      className="btn-purple"
+                      className="btn-default"
                     >
                       Excluir
                     </button>
