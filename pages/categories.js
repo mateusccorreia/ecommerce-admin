@@ -161,7 +161,7 @@ function Categories({ swal }) {
                   placeholder="valores, separados por virgula"
                 />
                 <button
-                  className="btn-default"
+                  className="btn-red"
                   type="button"
                   onClick={() => removeProperty(index)}
                 >
@@ -214,7 +214,7 @@ function Categories({ swal }) {
                     </button>
                     <button
                       onClick={() => deleteCategory(category)}
-                      className="btn-default"
+                      className="btn-red"
                     >
                       Excluir
                     </button>
